@@ -49,7 +49,7 @@
   border: 2px solid transparent;
 
   &:hover {
-    background: #1d4ed8; /* Более темный оттенок синего */
+    background: #1d4ed8;
     transform: translateY(-1px);
   }
 
@@ -63,7 +63,6 @@
   }
 }
 
-// Адаптивность
 @media (max-width: 768px) {
   .contact-form-section {
     padding: 1rem;

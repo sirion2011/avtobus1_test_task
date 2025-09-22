@@ -5,14 +5,14 @@ export class ContactForm {
     private contactManager: ContactManager;
     private onSubmitCallback: (() => void) | null = null;
 
-    constructor(formId: string) {
+    constructor(formId: string, contactManager: ContactManager) {
         const form = document.getElementById(formId);
         if (!form) {
             throw new Error(`Form with id '${formId}' not found`);
         }
         
         this.formElement = form as HTMLFormElement;
-        this.contactManager = new ContactManager();
+        this.contactManager = contactManager;
         this.init();
     }
 
@@ -39,7 +39,6 @@ export class ContactForm {
         const phone = formData.get('phone') as string;
         const group = formData.get('group') as string;
 
-        // Базовая валидация
         if (!name?.trim() || !phone?.trim()) {
             alert('Заполните все обязательные поля');
             return;
@@ -49,12 +48,14 @@ export class ContactForm {
             this.contactManager.addContact(name.trim(), phone.trim(), group);
             this.formElement.reset();
             
-            // Вызываем колбэк для обновления списка
+            console.log('Контакт добавлен, вызываем колбэк...');
+            
             if (this.onSubmitCallback) {
                 this.onSubmitCallback();
+            } else {
+                console.error('Колбэк не установлен!');
             }
 
-            console.log('Контакт добавлен:', { name, phone, group });
         } catch (error) {
             alert(error instanceof Error ? error.message : 'Ошибка при добавлении контакта');
         }
