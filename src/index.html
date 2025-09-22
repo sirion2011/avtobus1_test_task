@@ -3,11 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тестовое задание</title>
+    <title>Книга контактов</title>
     <link rel="stylesheet" href="./scss/main.scss">
 </head>
 <body>
-    <div id="app"></div>
+    <div class="app">
+        <header class="header">
+            <div class="container">
+                <h1 class="header__title">📒 Книга контактов</h1>
+            </div>
+        </header>
+        
+        <main class="main-content">
+    <div class="container">
+        <!-- Форма добавления контакта -->
+        <section class="contact-form-section">
+            <h2>➕ Добавить контакт</h2>
+            <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                    <label for="contact-name">ФИО *</label>
+                    <input type="text" id="contact-name" name="name" required 
+                           placeholder="Введите ФИО">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-phone">Номер телефона *</label>
+                    <input type="tel" id="contact-phone" name="phone" required 
+                           placeholder="+7 (000) 000-00-00">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-group">Группа</label>
+                    <select id="contact-group" name="group">
+                        <!-- Опции загрузятся через TypeScript -->
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-primary">Добавить контакт</button>
+            </form>
+        </section>
+
+        <!-- Список контактов -->
+        <section class="contacts-section">
+            <div id="contacts-container">
+                <!-- Сюда вставится список контактов -->
+            </div>
+        </section>
+    </div>
+</main>
+    </div>
     <script type="module" src="./ts/main.ts"></script>
 </body>
 </html>

@@ -1,0 +1,35 @@
+@import './variables.scss';
+@import './base/reset.scss';
+@import './components/contacts.scss';
+@import './components/contact-form.scss';
+
+// Базовые стили приложения
+.app {
+  min-height: 100vh;
+  background-color: var(--bg-secondary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.header {
+  background-color: var(--bg-primary);
+  padding: 1rem 0;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+
+  &__title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+}
+
+.main-content {
+  display: grid;
+  gap: 2rem;
+  padding: 1rem 0;
+}
