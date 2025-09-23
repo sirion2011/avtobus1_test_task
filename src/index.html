@@ -9,44 +9,77 @@
 <body>
     <div class="app">
         <header class="header">
-            <div class="container">
+            <div class="header-content">
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <span class="toggle-icon">☰</span>
+                    <span class="toggle-text">Группы</span>
+                </button>
                 <h1 class="header__title">📒 Книга контактов</h1>
             </div>
         </header>
         
-        <main class="main-content">
-    <div class="container">
-        <section class="contact-form-section">
-            <h2>➕ Добавить контакт</h2>
-            <form id="contact-form" class="contact-form">
-                <div class="form-group">
-                    <label for="contact-name">ФИО *</label>
-                    <input type="text" id="contact-name" name="name" required 
-                           placeholder="Введите ФИО">
+        <div class="app-content">
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-content">
+                    <h2 class="sidebar-title">Группы контактов</h2>
+                    <ul class="groups-list" id="groups-list">
+                        <li class="group-item active">
+                            <span class="group-name">Все контакты</span>
+                            <span class="group-count">(3)</span>
+                        </li>
+                        <li class="group-item">
+                            <span class="group-name">Друзья</span>
+                            <span class="group-count">(2)</span>
+                        </li>
+                        <li class="group-item">
+                            <span class="group-name">Коллеги</span>
+                            <span class="group-count">(1)</span>
+                        </li>
+                        <li class="group-item">
+                            <span class="group-name">Семья</span>
+                            <span class="group-count">(0)</span>
+                        </li>
+                    </ul>
                 </div>
-                
-                <div class="form-group">
-                    <label for="contact-phone">Номер телефона *</label>
-                    <input type="tel" id="contact-phone" name="phone" required 
-                           placeholder="+7 (000) 000-00-00">
-                </div>
-                
-                <div class="form-group">
-                    <label for="contact-group">Группа</label>
-                    <select id="contact-group" name="group">
-                    </select>
-                </div>
-                
-                <button type="submit" class="btn-primary">Добавить контакт</button>
-            </form>
-        </section>
+            </aside>
 
-        <section class="contacts-section">
-            <div id="contacts-container">
-            </div>
-        </section>
-    </div>
-</main>
+            <main class="main-content" id="main-content">
+                <div class="content-wrapper">
+                    <section class="contact-form-section">
+                        <h2>➕ Добавить контакт</h2>
+                        <form id="contact-form" class="contact-form">
+                            <div class="form-group">
+                                <label for="contact-name">ФИО *</label>
+                                <input type="text" id="contact-name" name="name" required 
+                                       placeholder="Введите ФИО">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact-phone">Номер телефона *</label>
+                                <input type="tel" id="contact-phone" name="phone" required 
+                                       placeholder="+7 (000) 000-00-00">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact-group">Группа</label>
+                                <select id="contact-group" name="group">
+                                    <option value="Друзья">Друзья</option>
+                                    <option value="Коллеги">Коллеги</option>
+                                    <option value="Семья">Семья</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary">Добавить контакт</button>
+                        </form>
+                    </section>
+
+                    <section class="contacts-section">
+                        <div id="contacts-container">
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
     </div>
     <script type="module" src="./ts/main.ts"></script>
 </body>
