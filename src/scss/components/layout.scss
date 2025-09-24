@@ -23,6 +23,7 @@ body {
     line-height: 1.5;
     color: var(--text-primary);
     background: var(--bg-secondary);
+    overflow-x: hidden;
 }
 
 .app {
@@ -31,13 +32,13 @@ body {
     flex-direction: column;
 }
 
-// Хедер - часть основного контента
+// Хедер
 .header {
     background: var(--bg-primary);
     padding: 1rem 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid var(--border-color);
-    position: relative; // Убираем fixed
+    position: relative;
     z-index: 100;
 }
 
@@ -82,18 +83,18 @@ body {
     flex: 1;
 }
 
-// Сайдбар - поверх всего контента
+// Сайдбар - всегда поверх контента
 .sidebar {
     width: 300px;
     background: var(--bg-primary);
     border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    height: 100vh; // Полная высота экрана
+    height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000; // Выше всего
+    z-index: 1000;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     
@@ -334,9 +335,20 @@ body {
     font-weight: bold;
 }
 
-// Overlay больше не нужен - убираем
+// Overlay для закрытия по клику вне сайдбара
 .sidebar-overlay {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    
+    &.active {
+        display: block;
+    }
 }
 
 // Основное содержание
@@ -344,7 +356,8 @@ body {
     flex: 1;
     padding: 2rem;
     background: var(--bg-secondary);
-    min-height: calc(100vh - 80px); // Высота минус хедер
+    min-height: calc(100vh - 80px);
+    transition: margin-left 0.3s ease;
 }
 
 .empty-state {
@@ -391,22 +404,20 @@ body {
 
 @media (min-width: 769px) {
     .sidebar {
-        position: static; // На десктопе сайдбар в потоке
-        transform: translateX(0);
-        height: auto;
-        box-shadow: none;
-    }
-    
-    .sidebar-toggle,
-    .sidebar-close {
-        display: none;
-    }
-    
-    .app-content {
-        min-height: 100vh;
+        width: 300px;
+        
+        &.open {
+            transform: translateX(0);
+        }
     }
     
     .main-content {
-        min-height: 100vh;
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .sidebar.open ~ .main-content {
+        margin-left: 300px;
+        width: calc(100% - 300px);
     }
 }

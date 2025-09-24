@@ -2,7 +2,9 @@ export class Sidebar {
     private sidebarElement: HTMLElement;
     private toggleButton: HTMLElement;
     private closeButton: HTMLElement;
+    private overlay: HTMLElement;
     private groupsList: HTMLElement;
+    private mainContent: HTMLElement;
     private isOpen: boolean = false;
 
     // Элементы для управления группами
@@ -17,7 +19,9 @@ export class Sidebar {
         this.sidebarElement = document.getElementById('sidebar')!;
         this.toggleButton = document.getElementById('sidebar-toggle')!;
         this.closeButton = document.getElementById('sidebar-close')!;
+        this.overlay = document.getElementById('sidebar-overlay')!;
         this.groupsList = document.getElementById('groups-list')!;
+        this.mainContent = document.getElementById('main-content')!;
         
         // Инициализация новых элементов
         this.addGroupBtn = document.getElementById('add-group-btn')!;
@@ -34,7 +38,6 @@ export class Sidebar {
         this.setupSidebarHandlers();
         this.setupGroupHandlers();
         this.setupGroupManagementHandlers();
-        this.checkViewport();
     }
 
     private setupSidebarHandlers(): void {
@@ -48,27 +51,21 @@ export class Sidebar {
             this.close();
         });
 
-        // ESC только для отмены формы
+        // Закрытие по overlay
+        this.overlay.addEventListener('click', () => {
+            this.close();
+        });
+
+        // ESC для закрытия сайдбара или отмены формы
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.addGroupForm.style.display !== 'none') {
-                this.cancelAddGroup();
+            if (e.key === 'Escape') {
+                if (this.addGroupForm.style.display !== 'none') {
+                    this.cancelAddGroup();
+                } else {
+                    this.close();
+                }
             }
         });
-
-        // Адаптация к изменению размера окна
-        window.addEventListener('resize', () => {
-            this.checkViewport();
-        });
-    }
-
-    private checkViewport(): void {
-        if (window.innerWidth >= 769) {
-            this.open(); // Всегда открыт на десктопе
-            this.isOpen = true;
-        } else {
-            this.close(); // Закрыт на мобильных по умолчанию
-            this.isOpen = false;
-        }
     }
 
     private setupGroupHandlers(): void {
@@ -87,11 +84,6 @@ export class Sidebar {
             
             if (groupItem) {
                 this.selectGroup(groupItem);
-                
-                // На мобильных закрываем сайдбар после выбора группы
-                if (window.innerWidth < 769) {
-                    this.close();
-                }
             }
         });
     }
@@ -237,11 +229,15 @@ export class Sidebar {
 
     public open(): void {
         this.sidebarElement.classList.add('open');
+        this.overlay.classList.add('active');
+        this.mainContent.classList.add('sidebar-open');
         this.isOpen = true;
     }
 
     public close(): void {
         this.sidebarElement.classList.remove('open');
+        this.overlay.classList.remove('active');
+        this.mainContent.classList.remove('sidebar-open');
         this.isOpen = false;
     }
 
