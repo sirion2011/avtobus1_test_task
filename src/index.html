@@ -12,71 +12,58 @@
             <div class="header-content">
                 <button class="sidebar-toggle" id="sidebar-toggle">
                     <span class="toggle-icon">☰</span>
-                    <span class="toggle-text">Группы</span>
                 </button>
                 <h1 class="header__title">📒 Книга контактов</h1>
             </div>
         </header>
         
         <div class="app-content">
+            <!-- Сайдбар с группами -->
             <aside class="sidebar" id="sidebar">
-                <div class="sidebar-content">
+                <div class="sidebar-header">
                     <h2 class="sidebar-title">Группы контактов</h2>
-                    <ul class="groups-list" id="groups-list">
-                        <li class="group-item active">
-                            <span class="group-name">Все контакты</span>
-                            <span class="group-count">(3)</span>
-                        </li>
-                        <li class="group-item">
-                            <span class="group-name">Друзья</span>
-                            <span class="group-count">(2)</span>
-                        </li>
-                        <li class="group-item">
-                            <span class="group-name">Коллеги</span>
-                            <span class="group-count">(1)</span>
-                        </li>
-                        <li class="group-item">
-                            <span class="group-name">Семья</span>
-                            <span class="group-count">(0)</span>
-                        </li>
-                    </ul>
+                    <button class="sidebar-close" id="sidebar-close">✕</button>
+                </div>
+                
+                <ul class="groups-list" id="groups-list">
+                    <!-- Группы будут добавляться динамически через JavaScript -->
+                </ul>
+
+                <!-- Форма добавления группы -->
+                <div class="add-group-form" id="add-group-form" style="display: none;">
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            id="group-name-input" 
+                            class="form-input" 
+                            placeholder="Введите название"
+                            maxlength="50"
+                        >
+                        <div class="form-actions">
+                            <button class="btn btn-success" id="confirm-add-group">✓</button>
+                            <button class="btn btn-cancel" id="cancel-add-group">✕</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Кнопки действий -->
+                <div class="sidebar-actions">
+                    <button class="btn btn-primary" id="add-group-btn">
+                        <span class="btn-icon">+</span>
+                        Добавить
+                    </button>
+                    <button class="btn btn-secondary" id="save-group-btn" style="display: none;">
+                        <span class="btn-icon">✓</span>
+                        Сохранить
+                    </button>
                 </div>
             </aside>
 
+            <!-- Основное содержание -->
             <main class="main-content" id="main-content">
-                <div class="content-wrapper">
-                    <section class="contact-form-section">
-                        <h2>➕ Добавить контакт</h2>
-                        <form id="contact-form" class="contact-form">
-                            <div class="form-group">
-                                <label for="contact-name">ФИО *</label>
-                                <input type="text" id="contact-name" name="name" required 
-                                       placeholder="Введите ФИО">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="contact-phone">Номер телефона *</label>
-                                <input type="tel" id="contact-phone" name="phone" required 
-                                       placeholder="+7 (000) 000-00-00">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="contact-group">Группа</label>
-                                <select id="contact-group" name="group">
-                                    <option value="Друзья">Друзья</option>
-                                    <option value="Коллеги">Коллеги</option>
-                                    <option value="Семья">Семья</option>
-                                </select>
-                            </div>
-                            
-                            <button type="submit" class="btn-primary">Добавить контакт</button>
-                        </form>
-                    </section>
-
-                    <section class="contacts-section">
-                        <div id="contacts-container">
-                        </div>
-                    </section>
+                <div class="empty-state">
+                    <h2>Список контактов пуст</h2>
+                    <p>Создайте группу и добавьте контакты</p>
                 </div>
             </main>
         </div>
